@@ -1,0 +1,17 @@
+--- cpu.py.org  2023-06-22 22:43:53.238917994 +0000
++++ cpu.py      2023-06-22 22:45:20.282308604 +0000
+@@ -56,6 +56,14 @@
+         self.last_idletime = idletime
+         if self.last_worktime == 0:
+             return 0
++        try:
++            f = open("/sys/class/thermal/thermal_zone0/temp", "r")
++        except:
++            return 0
++        line = f.readline()
++        f.close()
++        temp = int(line) / 1000
++        rate = str(rate) + " " + str(temp)
+         return rate
+ 
+     def add_client(self, c):

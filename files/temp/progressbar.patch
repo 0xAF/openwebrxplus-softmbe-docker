@@ -1,0 +1,16 @@
+--- ProgressBar.js.org  2023-06-22 22:45:34.132317850 +0000
++++ ProgressBar.js      2023-06-22 22:48:04.139086650 +0000
+@@ -142,8 +142,11 @@
+     return 'Server CPU [0%]';
+ };
+
+-CpuProgressBar.prototype.setUsage = function(usage) {
+-    this.set(usage, "Server CPU [" + Math.round(usage * 100) + "%]", usage > .85);
++CpuProgressBar.prototype.setUsage = function(value) {
++    var spl = value.split(" ");
++    var usage = parseFloat(spl[0]);
++    var temp = parseFloat(spl[1]).toFixed(1);
++    this.set(usage, "Server CPU [" + Math.round(usage * 100) + "%] [" + temp + "C]", usage > .85);
+ };
+
+ ProgressBar.types = {
