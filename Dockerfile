@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 MAINTAINER af@0xaf.org
-LABEL OpenWebRX+ with Digital codecs (incl. DMR, D-STAR) and all receivers.
+LABEL OpenWebRX+ with Digital codecs (incl. DMR, D-STAR, YSF) and all receivers.
 
 
 ADD files /files
