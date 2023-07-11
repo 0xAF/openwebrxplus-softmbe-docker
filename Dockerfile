@@ -1,22 +1,17 @@
-FROM debian:bullseye-slim
-MAINTAINER af@0xaf.org
-LABEL OpenWebRX+ with Digital codecs (incl. DMR, D-STAR, YSF) and all receivers.
+FROM slechev/openwebrxplus-nightly
+LABEL OpenWebRX+ (nightly) with Digital codecs (incl. DMR, D-STAR, YSF) and all receivers.
 
+COPY install-owrxp-extra.sh /
+RUN /install-owrxp-extra.sh
 
-ADD files /files
-COPY install-owrxp.sh /
-RUN /install-owrxp.sh
+# ENV S6_CMD_ARG0="/run.sh"
+# ENTRYPOINT ["/init"]
 
-COPY run.sh /
-
-ENV S6_CMD_ARG0="/run.sh"
-ENTRYPOINT ["/init"]
-
-WORKDIR /
+# WORKDIR /
 
 VOLUME /etc/openwebrx
 VOLUME /var/lib/openwebrx
 
-CMD []
+# CMD []
 
 EXPOSE 8073
