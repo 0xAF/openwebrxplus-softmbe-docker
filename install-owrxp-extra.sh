@@ -14,7 +14,7 @@ echo "deb [signed-by=/usr/share/keyrings/openwebrx.gpg] https://repo.openwebrx.d
 apt update
 
 echo "+ Install dev packages..."
-BUILD_PACKAGES="git build-essential debhelper cmake libprotobuf-dev protobuf-compiler libcodecserver-dev wget gpg ca-certificates"
+BUILD_PACKAGES="git build-essential debhelper cmake libprotobuf-dev protobuf-compiler libcodecserver-dev wget gpg"
 apt-get -y install --no-install-recommends $BUILD_PACKAGES
 
 echo "+ Install MBELIB..."
