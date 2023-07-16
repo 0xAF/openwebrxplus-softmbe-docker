@@ -54,6 +54,9 @@ _EOF_
 #/usr/bin/codecserver
 #_EOF_
 
+sed -i 's/set -euo pipefail/set -euo pipefail\ncd \/opt\/openwebrx/' /opt/openwebrx/docker/scripts/run.sh
+sed -i 's/set -euo pipefail/set -euo pipefail\ncd \/opt\/openwebrx/' /run.sh
+
 echo "+ Clean..."
 SUDO_FORCE_REMOVE=yes apt-get -y purge --autoremove $BUILD_PACKAGES
 apt-get clean
