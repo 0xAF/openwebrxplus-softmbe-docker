@@ -38,8 +38,9 @@ rm -rf codecserver-softmbe codecserver-driver-softmbe*
 rm -f *.deb
 
 # add the softmbe library to the codecserver config
-#cat >> /etc/codecserver/codecserver.conf << _EOF_
+ln -s /usr/lib/x86_64-linux-gnu/codecserver/libsoftmbe.so /usr/local/lib/codecserver/
 mkdir -p /usr/local/etc/codecserver
+#cat >> /etc/codecserver/codecserver.conf << _EOF_
 cat >> /usr/local/etc/codecserver/codecserver.conf << _EOF_
 
 # add softmbe
@@ -47,11 +48,11 @@ cat >> /usr/local/etc/codecserver/codecserver.conf << _EOF_
 driver=softmbe
 _EOF_
 
-mkdir -p /etc/services.d/codecserver
-cat >> /etc/services.d/codecserver/run << _EOF_
-#!/usr/bin/execlineb -P
-/usr/bin/codecserver
-_EOF_
+#mkdir -p /etc/services.d/codecserver
+#cat >> /etc/services.d/codecserver/run << _EOF_
+##!/usr/bin/execlineb -P
+#/usr/bin/codecserver
+#_EOF_
 
 echo "+ Clean..."
 SUDO_FORCE_REMOVE=yes apt-get -y purge --autoremove $BUILD_PACKAGES
