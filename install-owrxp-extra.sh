@@ -41,6 +41,8 @@ rm -f *.deb
 #cat >> /etc/codecserver/codecserver.conf << _EOF_
 mkdir -p /usr/local/etc/codecserver
 cat >> /usr/local/etc/codecserver/codecserver.conf << _EOF_
+
+# add softmbe
 [device:softmbe]
 driver=softmbe
 _EOF_
