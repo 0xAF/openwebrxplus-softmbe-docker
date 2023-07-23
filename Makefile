@@ -1,18 +1,21 @@
 DATE=$(shell date +%F)
+USER=slechev
+IMAGE=openwebrxplus-softmbe
+ARCH=$(shell uname -m)
+
 all:
-	@docker build -t openwebrxplus-softmbe:$(DATE) -t openwebrxplus-softmbe .
+	#docker build --platform=linux/arm64 --build-arg ARCH=$(ARCH) -t $(USER)/$(IMAGE):$(DATE)-arm64 -t $(USER)/$(IMAGE):$(DATE) -t $(USER)/$(IMAGE) .
+	docker build --platform=linux/amd64 --build-arg ARCH=$(ARCH) -t $(USER)/$(IMAGE):$(DATE)-amd64 -t $(USER)/$(IMAGE):$(DATE) -t $(USER)/$(IMAGE) .
 
 run:
-	@docker run --rm -h openwebrxplus-softmbe --name openwebrxplus-softmbe --device /dev/bus/usb -p 8073:8073 -v openwebrxplus-settings:/var/lib/openwebrx openwebrxplus-softmbe
+	@docker run --rm -h $(IMAGE) --name $(IMAGE) --device /dev/bus/usb -p 8073:8073 -v openwebrxplus-settings:/var/lib/openwebrx $(USER)/$(IMAGE)
 
 admin:
-	@docker exec -it openwebrxplus-softmbe /usr/bin/openwebrx admin adduser af
+	@docker exec -it $(USER)/$(IMAGE) /usr/bin/openwebrx admin adduser af
 
 push:
-	@docker tag openwebrxplus-softmbe:$(DATE) slechev/openwebrxplus-softmbe:$(DATE)
-	@docker tag openwebrxplus-softmbe:$(DATE) slechev/openwebrxplus-softmbe:latest
-	@docker push slechev/openwebrxplus-softmbe:$(DATE)
-	@docker push slechev/openwebrxplus-softmbe
+	@docker push $(USER)/$(IMAGE):$(DATE)
+	@docker push $(USER)/$(IMAGE)
 
 dev:
-	@S6_CMD_ARG0=/bin/bash docker run -it --rm -p 8073:8073 --device /dev/bus/usb --name owrxp-build --entrypoint /bin/bash openwebrxplus-softmbe
+	@S6_CMD_ARG0=/bin/bash docker run -it --rm -p 8073:8073 --device /dev/bus/usb --name owrxp-build --entrypoint /bin/bash $(USER)/$(IMAGE)
