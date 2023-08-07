@@ -7,6 +7,9 @@ all:
 	docker buildx build --push --pull --platform=linux/amd64,linux/arm64,linux/arm/v7 -t $(USER)/$(IMAGE):$(DATE) -t $(USER)/$(IMAGE) .
 	docker buildx rm --keep-state owrxp-builder
 
+build:
+	docker build --pull -t $(USER)/$(IMAGE):$(DATE) -t $(USER)/$(IMAGE) .
+
 run:
 	@docker run --rm -h $(IMAGE) --name $(IMAGE) --device /dev/bus/usb -p 8073:8073 -v openwebrxplus-settings:/var/lib/openwebrx $(USER)/$(IMAGE)
 

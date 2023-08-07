@@ -21,11 +21,11 @@ dpkg -i /deb/libmbe1_1.3.0_*.deb
 echo "+ Install codecserver-softmbe..."
 dpkg -i /deb/libcodecserver_*.deb
 dpkg -i /deb/codecserver-driver-softmbe_0.0.1_*.deb
-
 rm -rf /deb
 
 # add the softmbe library to the codecserver config
-ln -s /usr/lib/x86_64-linux-gnu/codecserver/libsoftmbe.so /usr/local/lib/codecserver/
+linklib=$(dpkg -L codecserver-driver-softmbe | grep libsoftmbe.so)
+ln -s $linklib /usr/local/lib/codecserver/
 mkdir -p /usr/local/etc/codecserver
 #cat >> /etc/codecserver/codecserver.conf << _EOF_
 cat >> /usr/local/etc/codecserver/codecserver.conf << _EOF_
