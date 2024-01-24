@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  openwebrx:
+    build: .
+    container_name: openwebrx
+    hostname: openwebrx
+    restart: always
+    volumes:
+      - ./openwebrx/data:/var/lib/openwebrx
+      - ./openwebrx/config:/etc/openwebrx
+      - /dev:/dev:rwm
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    ports:
+      - 8073:8073
+
+
+
+
+
